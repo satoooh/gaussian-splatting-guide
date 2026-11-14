@@ -83,17 +83,19 @@ export function mount(root) {
     readout.textContent = `反復 ${model.iteration} ／ Gaussian ${model.count}個 ／ PSNR ${psnr(model.mse).toFixed(1)} dB\n${lastEvent}`;
   }
 
+  function advance() {
+    step(model, target);
+    if (model.iteration % 10 === 0) history.push({ iteration: model.iteration, psnr: psnr(model.mse), count: model.count });
+    if (growth.value && model.iteration % GROW_EVERY === 0 && model.iteration <= GROW_UNTIL) {
+      const change = densify(model, random);
+      events.push(model.iteration);
+      lastEvent = `反復${model.iteration}の密度制御: 分割${change.split}・複製${change.cloned}・削除${change.pruned}` + (model.count >= model.capacity ? '（上限に到達）' : '');
+    }
+  }
+
   function loop() {
     const began = performance.now();
-    while (performance.now() - began < 10 && model.iteration < LIMIT) {
-      step(model, target);
-      if (model.iteration % 10 === 0) history.push({ iteration: model.iteration, psnr: psnr(model.mse), count: model.count });
-      if (growth.value && model.iteration % GROW_EVERY === 0 && model.iteration <= GROW_UNTIL) {
-        const change = densify(model, random);
-        events.push(model.iteration);
-        lastEvent = `反復${model.iteration}の密度制御: 分割${change.split}・複製${change.cloned}・削除${change.pruned}` + (model.count >= model.capacity ? '（上限に到達）' : '');
-      }
-    }
+    while (performance.now() - began < 10 && model.iteration < LIMIT) advance();
     paint();
     if (model.iteration >= LIMIT) { frame = 0; run.textContent = '完了'; return; }
     frame = requestAnimationFrame(loop);
@@ -121,6 +123,8 @@ export function mount(root) {
   });
   outlines.input.addEventListener('change', paint);
   onTheme(paint);
+  // note用のGIFのコマを撮るときは、?反復=300 のように渡した回数まで進めた状態を最初に表示する
+  const ahead = Math.min(LIMIT, Number(new URLSearchParams(location.search).get('反復')) || 0);
 
   const figure = (view, caption) => el('figure', {}, view.node, el('figcaption', {}, caption));
   root.append(
@@ -131,4 +135,5 @@ export function mount(root) {
     readout,
   );
   start();
+  if (ahead) { while (model.iteration < ahead) advance(); paint(); }
 }

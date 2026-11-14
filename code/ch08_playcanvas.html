@@ -1,0 +1,17 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>PlayCanvasで3DGSを表示する</title>
+<style>body{margin:0}pc-app{width:100vw;height:100vh}</style>
+<script type="importmap">
+{"imports":{"playcanvas":"https://cdn.jsdelivr.net/npm/playcanvas@2.24.1/build/playcanvas.mjs"}}
+</script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@playcanvas/web-components@0.30.0/dist/pwc.min.mjs"></script>
+<pc-app antialias="false" max-pixel-ratio="1">
+  <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
+  <pc-scene>
+    <pc-entity position="0 0 2.5"><pc-camera></pc-camera></pc-entity>
+    <pc-entity position="0 -0.7 0" rotation="0 0 180">
+      <pc-gsplat asset="toy"></pc-gsplat>
+    </pc-entity>
+  </pc-scene>
+</pc-app>
