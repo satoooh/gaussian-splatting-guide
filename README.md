@@ -21,7 +21,10 @@ note連載「Gaussian Splattingを学ぶ」のサンプルコードと、ブラ�
 
 ## サンプルコード
 
-- [code/ch04_1.py](code/ch04_1.py)　第4章「3DGSの描画の仕組み。投影とアルファ合成を式とPythonで確かめる」
+- [code/ch04_tiny.py](code/ch04_tiny.py)　第4章「3DGSの描画の仕組み。投影とアルファ合成を式とPythonで確かめる」
+- [code/ch04_tiny3d.py](code/ch04_tiny3d.py)　第4章「3DGSの描画の仕組み。投影とアルファ合成を式とPythonで確かめる」
+- [code/ch05_grad.py](code/ch05_grad.py)　第5章「3DGSの学習の仕組み。損失、勾配、密度制御でガウシアンを写真に合わせる」
+- [code/ch05_train.py](code/ch05_train.py)　第5章「3DGSの学習の仕組み。損失、勾配、密度制御でガウシアンを写真に合わせる」
 
 どれもPythonの標準ライブラリだけで動く。
 
