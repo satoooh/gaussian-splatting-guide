@@ -200,7 +200,7 @@ th { background: var(--wash); font-weight: 700; }
 .lab-toggle { display: inline-flex; flex-direction: row !important; align-items: center; gap: 8px !important; min-height: 48px; font-size: 16px; font-weight: 400 !important; cursor: pointer; }
 .lab-readout { margin: 16px 0 0; border: 0; border-left: 4px solid var(--line); border-radius: 0; padding: 4px 16px; background: none !important; white-space: pre-wrap; }
 .still .site-header, .still .site-footer, .still .skip, .still main > :not([data-lab]), .still .controls, .still .lab-actions { display: none; }
-.still main { width: 720px; margin: 0; padding: 0; }
+.still main { width: 620px; margin: 0; padding: 0; } /* noteが表示する幅。scripts/export-note-images.mjs と export-lab-gifs.mjs もこの幅で撮る */
 .still .lab-widget { margin: 0; padding-bottom: 8px; }
 .lab-embed { margin: 40px 0; border-block: 1px solid var(--line); padding-block: 16px 24px; }
 .lab-embed > figcaption { font-size: 16px; font-weight: 700; }
