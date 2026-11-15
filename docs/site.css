@@ -199,9 +199,12 @@ th { background: var(--wash); font-weight: 700; }
 .lab-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-block: 16px; }
 .lab-toggle { display: inline-flex; flex-direction: row !important; align-items: center; gap: 8px !important; min-height: 48px; font-size: 16px; font-weight: 400 !important; cursor: pointer; }
 .lab-readout { margin: 16px 0 0; border: 0; border-left: 4px solid var(--line); border-radius: 0; padding: 4px 16px; background: none !important; white-space: pre-wrap; }
-.still .site-header, .still .site-footer, .still .skip, .still main > :not([data-lab]), .still .controls, .still .lab-actions { display: none; }
+/* 読み出し（数値の文字）は画像に入れない。数値は本文とキャプションに書く */
+.still .site-header, .still .site-footer, .still .skip, .still main > :not([data-lab]), .still .controls, .still .lab-actions, .still .lab-readout { display: none; }
+/* 画像の地を絵と同じ色（src/labs/ui.mjs の LIGHT.paper）で埋めて、角の外に白が残らないようにする。noteの暗い画面では白い角が目立つ */
+.still body { background: #f2f2ef; }
 .still main { width: 620px; margin: 0; padding: 0; } /* noteが表示する幅。scripts/export-note-images.mjs と export-lab-gifs.mjs もこの幅で撮る */
-.still .lab-widget { margin: 0; padding-bottom: 8px; }
+.still .lab-widget { margin: 0; padding: 15px; } /* 59分割グリッドの余白。絵と文字が画像の端に付かないようにする */
 .lab-embed { margin: 40px 0; border-block: 1px solid var(--line); padding-block: 16px 24px; }
 .lab-embed > figcaption { font-size: 16px; font-weight: 700; }
 .lab-list { margin: 40px 0 0; padding: 0; list-style: none; }
