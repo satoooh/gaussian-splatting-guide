@@ -3,9 +3,10 @@ import { el, slider, canvas, theme, onTheme } from './ui.mjs';
 const fx = 1000, screen = 1000; // 画素単位の焦点距離と画面幅
 
 // 原点のカメラから見た1σ楕円の輪郭。接線の傾きx/zを二つ返す。
+// カメラが楕円の内側にあるときと、楕円がカメラの面（z = 0）に届くときは、写る範囲に端がないので null。
 export function silhouette(x0, z0, sx, sz) {
   const k = x0 * x0 / (sx * sx) + z0 * z0 / (sz * sz) - 1;
-  if (k <= 0) return null;
+  if (k <= 0 || z0 <= sz) return null;
   const a = x0 * x0 / sx ** 4 - k / (sx * sx);
   const b = 2 * x0 * z0 / (sx * sx * sz * sz);
   const c = z0 * z0 / sz ** 4 - k / (sz * sz);
@@ -72,7 +73,8 @@ export function mount(root) {
     g.fillStyle = c.warm; g.fillRect(stripX + stripW + 8, stripY + 6, 10, 10);
     g.fillStyle = c.ink; g.fillText('線形近似 ±1σ', stripX + stripW + 24, stripY - 6); g.fillText('実際の輪郭', stripX + stripW + 24, stripY + 16);
 
-    const actual = edges ? `${(fx * edges[0]).toFixed(1)} 〜 ${(fx * edges[1]).toFixed(1)}` : 'カメラが楕円の内側';
+    const inside = (x / sx.value) ** 2 + (z / sz.value) ** 2 <= 1;
+    const actual = edges ? `${(fx * edges[0]).toFixed(1)} 〜 ${(fx * edges[1]).toFixed(1)}` : inside ? 'カメラが楕円の内側' : '楕円がカメラの面（z = 0）に届くので、範囲に端がない';
     readout.textContent = `画面上の中心 u = fx·x/z = ${mean.toFixed(1)} 画素\n線形近似の標準偏差 ${sigma.toFixed(1)} 画素 → 1σの範囲 ${(mean - sigma).toFixed(1)} 〜 ${(mean + sigma).toFixed(1)}\n実際の1σ輪郭が写る範囲 ${actual}`;
   }
 
