@@ -16,7 +16,7 @@ export function basis(x, y, z, out) {
 }
 
 // 見る方向dに対する「本当の色」。差し色の拡散面に、一方向だけ強い白いハイライトを足す。
-function appearance(x, y, z) {
+export function appearance(x, y, z) {
   const diffuse = 0.35 + 0.65 * Math.max(0, 0.5 * x + 0.5 * y + 0.707 * z);
   const highlight = Math.max(0, 0.6 * x - 0.3 * y + 0.742 * z) ** 20;
   return ACCENT_RGB.map(v => v * diffuse + highlight);

@@ -34,7 +34,8 @@ export function orbit(scene, yaw, pitch, distance = 5) {
 }
 
 // 第4章の計算そのまま: 投影して、奥行きで並べ、手前から合成する。粒が11万個あっても手順は変わらない。
-export function drawScene(scene, cam, rgb, trans, width, height, focal, background, sorting = true) {
+// mode は第1章の惑星（splat3d.mjs）と同じ三通り。'point' は中心だけを点で、'solid' は1σの楕円を不透明に塗る
+export function drawScene(scene, cam, rgb, trans, width, height, focal, background, sorting = true, mode = 'splat') {
   const { count, pos, cov, rgba, work } = scene, [r0, r1, r2] = cam.rows, eye = cam.eye;
   const limX = 0.65 * width / focal, limY = 0.65 * height / focal;
   let near = Infinity, far = -Infinity;
@@ -70,7 +71,7 @@ export function drawScene(scene, cam, rgb, trans, width, height, focal, backgrou
   for (let n = 0; n < visible; n += 1) {
     const i = order[n], a = work.a[i], b = work.b[i], c = work.c[i], det = a * c - b * b, opacity = rgba[i * 4 + 3];
     if (det <= 0 || opacity < 1 / 255) continue;
-    const cx = work.u[i], cy = work.v[i], reach = 3 * Math.sqrt(Math.max(a, c));
+    const cx = work.u[i], cy = work.v[i], reach = mode === 'point' ? 1 : 3 * Math.sqrt(Math.max(a, c));
     const x0 = Math.max(0, Math.floor(cx - reach)), x1 = Math.min(width - 1, Math.ceil(cx + reach));
     const y0 = Math.max(0, Math.floor(cy - reach)), y1 = Math.min(height - 1, Math.ceil(cy + reach));
     const ia = c / det, ib = -b / det, ic = a / det, r = rgba[i * 4], g = rgba[i * 4 + 1], bl = rgba[i * 4 + 2];
@@ -80,8 +81,8 @@ export function drawScene(scene, cam, rgb, trans, width, height, focal, backgrou
         const p = y * width + x, t = trans[p];
         if (t < 0.004) continue;
         const dx = x + 0.5 - cx, q = ia * dx * dx + 2 * ib * dx * dy + ic * dy * dy;
-        if (q > 9) continue;
-        let alpha = opacity * Math.exp(-0.5 * q);
+        if (mode === 'splat' ? q > 9 : mode === 'solid' && q > 1) continue;
+        let alpha = mode === 'splat' ? opacity * Math.exp(-0.5 * q) : 1;
         if (alpha < 1 / 255) continue;
         if (alpha > 0.99) alpha = 0.99;
         const weight = t * alpha;

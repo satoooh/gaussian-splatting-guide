@@ -2,8 +2,8 @@ import math
 
 
 def alpha_at(splat, x, y):
-    cx, cy, sx, sy, angle, depth, opacity, rgb = splat
-    dx, dy = x - cx, y - cy
+    mx, my, sx, sy, angle, depth, opacity, rgb = splat
+    dx, dy = x - mx, y - my
     c, s = math.cos(angle), math.sin(angle)
     u, v = c * dx + s * dy, -s * dx + c * dy
     r2 = (u / sx) ** 2 + (v / sy) ** 2

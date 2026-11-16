@@ -8,5 +8,5 @@ export const labs = [
   { id: 'compositing', title: '二つのスプラットを重ねる', prompt: '前後を入れ替えても変わらない値はどれか。', chapter: '04-rendering' },
   { id: 'splat3d', title: '小さな3DGSを回す', prompt: '深度ソートを切ると、どの向きで破綻するか。', chapter: '04-rendering' },
   { id: 'interp', title: '撮影フレームの間を描画する', prompt: '粒を混ぜるか、動かすか。フレームを増やすと、ずれはどう減るか。', chapter: '09-dynamic' },
-  { id: 'spacetime', title: '時空間のガウシアンを切る', prompt: '傾きが速度に、時間方向の幅が寿命になる。', chapter: '09-dynamic' },
+  { id: 'spacetime', title: '4Dガウシアンを時刻で切る', prompt: '傾きが速度に、時間方向の幅が寿命になる。', chapter: '09-dynamic' },
 ];
