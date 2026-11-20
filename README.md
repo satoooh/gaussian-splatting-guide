@@ -22,18 +22,18 @@ note連載「Gaussian Splattingを学ぶ」のサンプルコードと、ブラ�
 ## サンプルコード
 
 - [code/ch04_tiny.py](code/ch04_tiny.py)　第4章「3DGSの描画の仕組み: 投影、画面上の共分散、アルファ合成、タイル」
-- [code/ch04_tiny3d.py](code/ch04_tiny3d.py)　第4章「3DGSの描画の仕組み: 投影、画面上の共分散、アルファ合成、タイル」
 - [code/ch05_grad.py](code/ch05_grad.py)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
-- [code/ch05_train.py](code/ch05_train.py)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
-- [code/ch05_train3d.py](code/ch05_train3d.py)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
 - [code/ch06_download.py](code/ch06_download.py)　第6章「3DGSの作り方: 写真の準備、Brushでの学習、SuperSplatでの粒の削除、評価」
 - [code/ch08_playcanvas.html](code/ch08_playcanvas.html)　第8章「3DGSのファイル形式と配布: PLY、圧縮、SOG、SPZ、ビューア」
 - [code/ch08_sizes.py](code/ch08_sizes.py)　第8章「3DGSのファイル形式と配布: PLY、圧縮、SOG、SPZ、ビューア」
 - [code/ch08_spark.html](code/ch08_spark.html)　第8章「3DGSのファイル形式と配布: PLY、圧縮、SOG、SPZ、ビューア」
-- [code/ch09_tiny4d.py](code/ch09_tiny4d.py)　第9章「4D Gaussian Splatting（4DGS）の基礎: 時間を表す四つの方式、学習の実験、試し方」
+- [code/ch04_tiny3d/](code/ch04_tiny3d/)　第4章「3DGSの描画の仕組み: 投影、画面上の共分散、アルファ合成、タイル」
 - [code/ch05_real/](code/ch05_real/)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
+- [code/ch05_train/](code/ch05_train/)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
+- [code/ch05_train3d/](code/ch05_train3d/)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
+- [code/ch09_tiny4d/](code/ch09_tiny4d/)　第9章「4D Gaussian Splatting（4DGS）の基礎: 時間を表す四つの方式、学習の実験、試し方」
 
-Pythonのコードは標準ライブラリだけで動く。ただし、フォルダに分けたコード（`code/ch05_real/`）は、PyTorch、NumPy、Pillowを使う。HTMLの例は、`python3 -m http.server` で配って開く。公開している版は https://satoooh.github.io/gaussian-splatting-guide/examples/ の下にある。
+Pythonのコードは標準ライブラリだけで動く。ただし `code/ch05_real/` は、PyTorch、NumPy、Pillowを使う。HTMLの例は、`python3 -m http.server` で配って開く。公開している版は https://satoooh.github.io/gaussian-splatting-guide/examples/ の下にある。
 
 ## ライセンス
 

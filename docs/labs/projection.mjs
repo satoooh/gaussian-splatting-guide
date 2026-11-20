@@ -21,7 +21,7 @@ export function mount(root) {
   const sx = slider('横の広がり σx', { min: 0.02, max: 0.5, step: 0.01, value: 0.1, format: v => `${v.toFixed(2)} m` });
   const sz = slider('奥行きの広がり σz', { min: 0.02, max: 0.8, step: 0.01, value: 0.1, format: v => `${v.toFixed(2)} m` });
   const readout = el('pre', { className: 'lab-readout' });
-  const scale = 88, ox = 56, oy = 140; // 上面図: 右がz、上がx
+  const scale = 88, ox = 56, oy = 140; // 上面図: 右がz、下がx（第3章と第4章の上から見た図と同じ向き）
   const stripY = 340, stripX = 16, stripW = 480;
 
   function draw() {
@@ -37,25 +37,33 @@ export function mount(root) {
     g.fillText('上から見た配置', 12, 20);
     g.fillText('画面（幅1000画素、fx = 1000画素）', 12, 300);
 
+    // 上面図は帯の上（y < 290）に収める。画角の端の線が帯と凡例を横切らないようにする
+    g.save();
+    g.beginPath(); g.rect(0, 26, view.width, 290 - 26); g.clip();
     g.strokeStyle = c.line;
     g.lineWidth = 1;
     g.setLineDash([4, 4]);
     g.beginPath(); g.moveTo(ox, oy); g.lineTo(630, oy); g.stroke();
     g.setLineDash([]);
     for (const m of [-0.5, 0.5]) { // 画角の端
-      g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox + 6.5 * scale, oy - m * 6.5 * scale); g.stroke();
+      g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox + 6.5 * scale, oy + m * 6.5 * scale); g.stroke();
     }
-    g.fillStyle = c.ink;
-    g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox - 22, oy - 12); g.lineTo(ox - 22, oy + 12); g.fill();
+    // カメラの三角形（図と同じ形）。頂点がカメラの中心、太い底辺が画像の側。奥行きは底辺の1.5倍
+    g.strokeStyle = c.ink;
+    g.beginPath(); g.moveTo(ox + 21, oy - 7); g.lineTo(ox, oy); g.lineTo(ox + 21, oy + 7); g.closePath(); g.stroke();
+    g.lineWidth = 2.2;
+    g.beginPath(); g.moveTo(ox + 21, oy - 7); g.lineTo(ox + 21, oy + 7); g.stroke();
+    g.lineWidth = 1;
 
     g.fillStyle = c.accent + '55';
     g.strokeStyle = c.accent;
-    g.beginPath(); g.ellipse(ox + z * scale, oy - x * scale, sz.value * scale, sx.value * scale, 0, 0, 2 * Math.PI);
+    g.beginPath(); g.ellipse(ox + z * scale, oy + x * scale, sz.value * scale, sx.value * scale, 0, 0, 2 * Math.PI);
     g.fill(); g.stroke();
     if (edges) {
       g.strokeStyle = c.warm;
-      for (const m of edges) { g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox + 6.5 * scale, oy - m * 6.5 * scale); g.stroke(); }
+      for (const m of edges) { g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox + 6.5 * scale, oy + m * 6.5 * scale); g.stroke(); }
     }
+    g.restore();
 
     const toStrip = u => stripX + (u + screen / 2) / screen * stripW;
     g.strokeStyle = c.line;
@@ -69,8 +77,8 @@ export function mount(root) {
       g.fillRect(toStrip(fx * edges[0]), stripY, (edges[1] - edges[0]) * fx / screen * stripW, 22);
     }
     g.restore();
-    g.fillStyle = c.accent; g.fillRect(stripX + stripW + 8, stripY - 16, 10, 10);
-    g.fillStyle = c.warm; g.fillRect(stripX + stripW + 8, stripY + 6, 10, 10);
+    g.fillStyle = c.accent + 'cc'; g.fillRect(stripX + stripW + 8, stripY - 16, 10, 10); // 凡例は帯と同じ色
+    g.fillStyle = c.warm + '88'; g.fillRect(stripX + stripW + 8, stripY + 6, 10, 10);
     g.fillStyle = c.ink; g.fillText('線形近似 ±1σ', stripX + stripW + 24, stripY - 6); g.fillText('実際の輪郭', stripX + stripW + 24, stripY + 16);
 
     const inside = (x / sx.value) ** 2 + (z / sz.value) ** 2 <= 1;
