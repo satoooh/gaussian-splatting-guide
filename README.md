@@ -21,13 +21,13 @@ note連載「Gaussian Splattingを学ぶ」のサンプルコードと、ブラ�
 
 ## サンプルコード
 
-- [code/ch04_tiny.py](code/ch04_tiny.py)　第4章「3DGSの描画の仕組み: 投影、画面上の共分散、アルファ合成、タイル」
-- [code/ch05_grad.py](code/ch05_grad.py)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
 - [code/ch06_download.py](code/ch06_download.py)　第6章「3DGSの作り方: 写真の準備、Brushでの学習、SuperSplatでの粒の削除、評価」
 - [code/ch08_playcanvas.html](code/ch08_playcanvas.html)　第8章「3DGSのファイル形式と配布: PLY、圧縮、SOG、SPZ、ビューア」
 - [code/ch08_sizes.py](code/ch08_sizes.py)　第8章「3DGSのファイル形式と配布: PLY、圧縮、SOG、SPZ、ビューア」
 - [code/ch08_spark.html](code/ch08_spark.html)　第8章「3DGSのファイル形式と配布: PLY、圧縮、SOG、SPZ、ビューア」
+- [code/ch04_tiny/](code/ch04_tiny/)　第4章「3DGSの描画の仕組み: 投影、画面上の共分散、アルファ合成、タイル」
 - [code/ch04_tiny3d/](code/ch04_tiny3d/)　第4章「3DGSの描画の仕組み: 投影、画面上の共分散、アルファ合成、タイル」
+- [code/ch05_grad/](code/ch05_grad/)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
 - [code/ch05_real/](code/ch05_real/)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
 - [code/ch05_train/](code/ch05_train/)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
 - [code/ch05_train3d/](code/ch05_train3d/)　第5章「3DGSの学習の仕組み: 損失、勾配、Adam、密度制御」
