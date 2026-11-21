@@ -1,5 +1,5 @@
 # 料理の写真51枚とカメラ姿勢を取得する。標準ライブラリだけで動く。
-# 使い方：python3 ch06_download.py [保存先のフォルダ]
+# 使い方：python3 download.py [保存先のフォルダ]
 import hashlib
 import json
 import sys

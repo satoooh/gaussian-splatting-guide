@@ -1,5 +1,5 @@
 # 3DGSのPLYを読み、値を変えない保存の仕方でどこまで小さくなるかを測る。標準ライブラリだけで動く。
-# 使い方：python3 ch08_sizes.py bowl-30000.ply
+# 使い方：python3 sizes.py bowl-30000.ply
 import sys
 import zlib
 from array import array
